@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path')
 const { Schema } = mongoose;
 const session = require('express-session');
+const { MongoStore } = require('connect-mongo');
 const bcrypt = require('bcrypt');
 const port = 3019
 
@@ -13,11 +14,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
+const isProd = process.env.NODE_ENV === 'production';
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } // set to true if your using https
+  saveUninitialized: false,
+  store: MongoStore.create({mongoUrl: process.env.MONGODB_URI}),
+  cookie: {
+    secure: isProd,
+    sameSite: isProd ? 'none' : 'lax',
+    httpOnly: true,
+    maxAge: 15*60*1000
+  }
 }));
 
 mongoose.connect(process.env.MONGODB_URI)
