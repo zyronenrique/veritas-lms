@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path')
@@ -13,13 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.use(session({
-  secret: '@123456',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false } // set to true if your using https
 }));
 
-mongoose.connect('mongodb://localhost:27017/VERITAS_LMS')
+mongoose.connect(process.env.MONGODB_URI)
 const db = mongoose.connection
 db.once('open',()=>{
   console.log("Mongodb connection successful")
