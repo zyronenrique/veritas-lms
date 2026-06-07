@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Veritas LMS</title>
+    <link rel="icon" href="/images/logo2.png"/>
+    <link rel="stylesheet" href="/css/veritas.css"/>
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'/>
+    <link rel="stylesheet" href="/css/swiper-bundle.min.css">
+    <script>
+        function fetchWithErrorHandler(url, options) {
+            return fetch(url, options)
+                .then(response => {
+                    if (!response.ok && response.status === 400) {
+                        return response.json().then(err => {
+                            throw new Error(err.message);
+                        });
+                    }
+                    return response.json();
+                })
+                .catch(error => {
+                    // Show your modal here
+                    $('#errorModal .modal-body').text(error.message);
+                    $('#errorModal').modal('show');
+                });
+        }
+        $(document).ready(function() {
+            $('#modalregister').on('submit', function(e) {
+                e.preventDefault();
+                var dataToSend = $(this).serialize();
+                fetchWithErrorHandler('/register', {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: dataToSend,
+                })
+            });
+
+            $('#modallogin').on('submit', function(e) {
+                e.preventDefault();
+                var dataToSend = $(this).serialize();
+                fetchWithErrorHandler('/login', {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: dataToSend
+                })
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="rbcbg">
+            <header>
+                <a href="http://localhost:3019">
+                    <img class="logo" src="images/logo2.png" alt="Veritas Logo">
+                </a>
+                <div class="navbar">
+                    <nav class="navbox">
+                        <ul class="nav-menu">
+                            <li class="nav-item nav-itemA">
+                                <a href="/veritas">
+                                    <i class='bx-fw bx bxs-home bx-tada-hover'></i>    
+                                    Home
+                                </a>
+                            </li>
+                            <li class="nav-item nav-itemA">
+                                <a href="#">
+                                    <i class='bx-fw bx bxs-info-circle bx-tada-hover'></i>    
+                                    About
+                                </a>
+                            </li>
+                            <li class="nav-item nav-itemA">
+                                <a href="#">
+                                    <i class=' bx-fw bx bxs-envelope bx-tada-hover'></i>    
+                                    Contact
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav-menu2" id="nav-menu2">
+                            <li class="nav-item nav-itemA">
+                                <a id="loginbtn" class="loginbtn" href="#">
+                                    <i class='bx-fw bx bxs-lock-alt bx-tada-hover'></i>
+                                    Login
+                                </a>
+                            </li>
+                            <span> | </span>
+                            <li class="nav-item nav-itemA">
+                                <a id="registerbtn" class="registerbtn" href="#">
+                                    <i class='bx-fw bx bxs-user-plus bx-tada-hover'></i>
+                                    Sign Up
+                                </a>
+                            </li>
+                            <!-- <li class="nav-item nav-itemA">
+                                <a id="logoutbtn" class="logoutbtn" href="#">
+                                    <i class='bx-fw bx bx-log-out bx-tada-hover'></i>
+                                    Log Out
+                                </a>
+                            </li> -->
+                        </ul>
+                    </nav>
+                </div>
+                <div class="nav-menu3">
+                    <a class="togglebtn" href="#">
+                        <i class='bx bx-menu bx-md'></i>
+                    </a>
+                </div> 
+            </header>
+            <section>
+                <div class="contentsection">
+                    <div class="sg">
+                        <div class="greetings">
+                            <h2>Welcome to Veritas LMS</h2>
+                            <p>Veritas LMS is a Library Management System that provides a platform for students and teachers to interact and collaborate in a virtual environment. It is designed to help students learn and teachers teach in a more efficient and effective way.</p>
+                            <a href="about.html">Learn More</a>
+                        </div>
+                        <div>
+                            <img src="images/bg3.png" alt="background">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="dropdown-menu">
+                <ul>
+                    <li class="nav-item nav-itemA">
+                        <a href="veritas">
+                            <i class='bx-fw bx bxs-home bx-tada-hover'></i>    
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item nav-itemA">
+                        <a href="#">
+                            <i class='bx-fw bx bxs-info-circle bx-tada-hover'></i>    
+                            About
+                        </a>
+                    </li>
+                    <li class="nav-item nav-itemA">
+                        <a href="#">
+                            <i class=' bx-fw bx bxs-envelope bx-tada-hover'></i>    
+                            Contact
+                        </a>
+                    </li>
+                    <li class="nav-item nav-itemA">
+                        <a id="dmloginbtn" class="loginbtn" href="#">
+                            <i class='bx-fw bx bxs-lock-alt bx-tada-hover'></i>
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item nav-itemA">
+                        <a id="dmregisterbtn" class="registerbtn" href="#">
+                            <i class='bx-fw bx bxs-user-plus bx-tada-hover'></i>
+                            Sign Up
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <h2>Popular Books</h2>
+        <div class="slide-container swiper">
+            <div class="slide-content">
+                <div class="card-wrapper swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="wrap">
+                            <div class="item">
+                                <p>Pride & Prejudice <i class='bx bxs-book-open'></i> </p>
+                                <img src="https://th.bing.com/th/id/R.c1c6633e41f81590f94188bfda47f1c4?rik=Y8yYxcTO5JDqfg&riu=http%3a%2f%2fd28hgpri8am2if.cloudfront.net%2fbook_images%2fonix%2fcvr9781471134746%2fpride-and-prejudice-9781471134746_hr.jpg&ehk=x2q%2fXHpsXqzUEAXbe4Bq%2f7uW8D%2fDjubqcxy5Kr9N93g%3d&risl=&pid=ImgRaw&r=0" alt="Book Cover">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="wrap">
+                            <div class="item">
+                                <p>1984 <i class='bx bxs-book-open'></i> </p>
+                                <img src="https://i.thenile.io/r1000/9780452262935.jpg?r=5e7d61110b596" alt="Book Cover">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="wrap">
+                            <div class="item">
+                                <p>To Kill A Mocking Bird <i class='bx bxs-book-open'></i> </p>
+                                <img src="https://th.bing.com/th/id/OIP.8aK7lEx70a-l2PAysUN8twHaKj?rs=1&pid=ImgDetMain" alt="Book Cover">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="wrap">
+                            <div class="item">
+                                <p>Romeo & Juliet <i class='bx bxs-book-open'></i> </p>
+                                <img src="https://i.thenile.io/r1000/9781517283148.jpg?r=609502ad34ec5" alt="Book Cover">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="wrap">
+                            <div class="item">
+                                <p>The Hunger Games <i class='bx bxs-book-open'></i> </p>
+                                <img src="https://www.bestofyabooks.nl/sites/default/files/covers/hires/9789000337071.jpg" alt="Book Cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next swiper-navBtn"></div>
+            <div class="swiper-button-prev swiper-navBtn"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <section>
+            <div class="about">
+                <div class="Us">
+                    <h2>About</h2>
+                    <span>Veritas Library Management System</span>
+                    <p>Veritas Library Management is a modern and innovative library management system designed to streamline library operations and enhance user experience. Our goal is to provide libraries with cutting-edge technology to effectively manage their collections, improve accessibility to resources, and create a seamless borrowing and returning process for library patrons. With Veritas Library Management, libraries can efficiently organize and catalog their materials, track circulation, manage user accounts, and generate insightful reports. Our user-friendly interface and robust features make it an ideal solution for libraries of all sizes.</p>
+                </div>
+                <div>
+                    <img src="images/bg4.png" alt="background">
+                </div>
+            </div>
+        </section>
+        <footer>
+            <h2>CONNECT WITH VERITAS LMS</h2>
+                <div class="smlogo">
+                    <a href="https://twitter.com/" title="Twitter"><i class='bx bxl-twitter bx-border'></i></a>
+                    <a href="https://facebook.com" title="Facebook"><i class='bx bxl-facebook-square bx-border'></i></a>
+                    <a href="https://youtube.com" title="Youtube"><i class='bx bxl-youtube bx-border' ></i></a>
+                    <a href="https://tiktok.com" title="Tiktok"><i class='bx bxl-tiktok bx-border' ></i></a>
+                    <a href="https://instagram" title="Instagram"><i class='bx bxl-instagram-alt bx-border' ></i></a>  
+                </div>
+                <div>
+                    <h3>@2024 Veritas LMS. All Rights Reserved.</h3>
+                </div>
+        </footer>
+        <div class="modallogin" id="modallogin">
+            <div class="modal-contents fade">
+                <div class="close4login">+</div>
+                <h2>Login</h2>
+                <form action="/login" method="post">
+                    <div class="inputbox">
+                        <input type="text" id="loginemailorphone" name="loginemailorphone" minlength="10" maxlength="30" required="required">
+                        <span>Email or Phone</span>
+                        <i></i>
+                        <ii class='bx bxs-envelope' ></ii>
+                    </div>
+                    <div class="inputbox">
+                        <input type="password" id="loginpw" name="loginpw" minlength="6" maxlength="20" required="required">
+                        <span>Password</span>
+                        <i></i>
+                        <ii class='bx bxs-lock-alt'></ii>
+                    </div>
+                    <div class="links">
+                        <a href="#">Forgot Password</a>
+                        <div>
+                            <span>Don't have an account?</span>
+                            <a  id="registerbtn2" class="registerbtn2" href="#">Sign Up</a>
+                        </div>
+                    </div>
+                    <input id="LoginMo" type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+        <div class="modalregister" id="modalregister">
+            <div class="modal-contents2 fade">
+                <div class="close4register">+</div>
+                <h2>Sign-Up</h2>
+                <form action="/register" method="post">
+                    <div class="inputbox2">
+                        <input type="text" name="name" maxlength="35" required>
+                        <span>Name</span>
+                        <i></i>
+                        <ii class='bx bxs-user'></ii>
+                    </div>
+                    <div class="inputbox2">
+                        <input type="email" name="regemail" maxlength="30" required>
+                        <span>Email</span>
+                        <i></i>
+                        <ii class='bx bxs-envelope' ></ii>
+                    </div>
+                    <div class="inputbox2">
+                        <input type="text" id="phoneno" name="regpn" minlength="10" maxlength="10" required>
+                        <span>Phone No.</span>
+                        <i></i>
+                        <ii class='bx bxs-phone'></ii>
+                    </div>
+                    <div class="inputbox2">
+                        <select name="userrole" title="User Role" required>
+                            <option value="" selected></option>
+                            <option value="Student">Student</option>
+                            <option value="Teacher">Teacher</option>
+                        </select>
+                        <span>Position</span>
+                        <i></i>
+                        <ii class='bx bxs-user-badge'></ii>
+                    </div>
+                    <div class="inputbox2">
+                        <input type="password" name="regpw" minlength="6" maxlength="20" required="required">
+                        <span>Password</span>
+                        <i></i>
+                        <ii class='bx bxs-lock-alt'></ii>
+                    </div>
+                    <div class="links2">
+                        <span>Already have an account?</span>
+                        <a  id="loginbtn2" class="loginbtn2" href="#">Login</a>
+                    </div>
+                    <input id="RegisterMo" type="submit" value="Register">
+                </form>
+            </div>
+        </div>
+        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Invalid!</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="/js/swiper-bundle.min.js"></script>
+    <script src="server.js"></script>
+    <script src="/js/veritas.js"></script>
+</html>

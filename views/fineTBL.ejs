@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Admin Dashboard</title>
+    <link rel="icon" href="/images/logo2.png"/>
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'/>
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#selectAll').on('change', function() {
+                $('.selectRow').prop('checked', this.checked);
+            });
+
+            // Initially hide the delete button
+            $('.delrowall').hide();
+
+            // Show or hide the delete button when a checkbox is clicked
+            $('.selectRow').on('change', function() {
+                if ($('.selectRow:checked').length > 0) {
+                    // If any checkboxes are checked, show the delete button
+                    $('.delrowall').show();
+                } else {
+                    // If no checkboxes are checked, hide the delete button
+                    $('.delrowall').hide();
+                }
+            });
+
+            // Show or hide the delete button when the "select all" checkbox is clicked
+            $('#selectAll').on('change', function() {
+                if (this.checked) {
+                    // If the "select all" checkbox is checked, show the delete button
+                    $('.delrowall').show();
+                } else {
+                    // If the "select all" checkbox is unchecked, hide the delete button
+                    $('.delrowall').hide();
+                }
+            });
+
+            $('.delete-item').on('click', function(e) {
+                e.preventDefault();
+                $(this).closest('tr').find('.selectRow').prop('checked', true);
+                var ids = $('.selectRow:checked').map(function() {
+                    return $(this).closest('tr').find('td:eq(1)').text();
+                }).get();
+                if(ids.length === 0) {
+                    alert('Please select at least one book to delete.');
+                    return;
+                }
+                $('#deleteModal input[name="fineidhidden"]').val(JSON.stringify(ids));
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar2 close2">
+            <div class="logo-details">
+                <a href="/dashboard">
+                    <i class='bx bxl-vimeo'></i>
+                    <span class="logo_name">Veritas LMS</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/dashboard">
+                        <i class='bx bx-grid-alt' ></i>
+                        <span class="link_name">Dashboard</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li>
+                            <a class="link_name" href="/dashboard">Dashboard</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-collection'></i>
+                        <span class="link_name">Category</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow' ></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li>
+                            <a class="link_name" href="#">Category</a>
+                        </li>
+                        <li>
+                            <a href="/tableFiction">Fiction</a>
+                        </li>
+                        <li>
+                            <a href="/tableMystery">Mystery</a>
+                        </li>
+                        <li>
+                            <a href="/tableRomance">Romance</a>
+                        </li>
+                        <li>
+                            <a href="/tableSciFi">Science Fiction</a>
+                        </li>
+                        <li>
+                            <a href="/tableFantasy">Fantasy</a>
+                        </li>
+                        <li>
+                            <a href="/tableThriller">Thriller</a>
+                        </li>
+                        <li>
+                            <a href="/tableBiography">Biography</a>
+                        </li>
+                        <li>
+                            <a href="/tableHorror">Horror</a>
+                        </li>
+                        <li>
+                            <a href="/tableHistory">History</a>
+                        </li>
+                        <li>
+                            <a href="/tableNovel">Novel</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class='bx bx-book-alt' ></i>
+                            <span class="link_name">Records</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow' ></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li>
+                            <a class="link_name" href="#">Records</a>
+                        </li>
+                        <li>
+                            <a href="/tableLibrarian">Librarian</a>
+                        </li>
+                        <li>
+                            <a href="/tableStudents">Students</a>
+                        </li>
+                        <li>
+                            <a href="/tableTeachers">Teachers</a>
+                        </li>
+                        <li>
+                            <a href="/tableStaff">Staff</a>
+                        </li>
+                        <li>
+                            <a href="/tableBooks">Books</a>
+                        </li>
+                        <li>
+                            <a href="/tableAuthors">Authors</a>
+                        </li>
+                        <li>
+                            <a href="/tablePublisher">Publisher</a>
+                        </li>
+                        <li>
+                            <a href="/tableFine">Fine</a>
+                        </li>
+                        <li>
+                            <a href="/tableCheckout">Checkout</a>
+                        </li>
+                        <li>
+                            <a href="/tableUsers">Accounts</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="iocn-link">
+                        <a href="#">
+                            <i class='bx bx-history'></i>
+                            <span class="link_name">History</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow' ></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li>
+                            <a class="link_name" href="#">History</a>
+                        </li>
+                        <li>
+                            <a href="/tableLibrarian">Borrowed Books Logs</a>
+                        </li>
+                        <li>
+                            <a href="/tableStudents">Returned Books Logs</a>
+                        </li>
+                        <li>
+                            <a href="/tableStaff">Reservation Logs</a>
+                        </li>
+                        <li>
+                            <a href="/tableBooks">Transaction Logs</a>
+                        </li>
+                        <li>
+                            <a href="/tableActivityLogs">Activity Logs</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class='bx bx-cog' ></i>
+                        <span class="link_name">Setting</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li>
+                            <a class="link_name" href="#">Setting</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="profile-details">
+                        <div class="profile-content">
+                            <img class="logo" src="images/logo2.png" alt="Veritas Logo">
+                        </div>
+                        <div class="name-job">
+                            <div class="profile_name"><%= user ? user.Name : 'Admin' %></div>
+                            <div class="job"><%= user ? user.User_Role : 'Admin' %></div>
+                        </div>
+                            <i class='bx bx-log-out' data-toggle="modal" data-target="#logoutModal"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <section class="home-section">
+            <div class="home-content">
+                <i class='bx bx-menu' ></i>
+                <span class="text">Fine</span>
+            </div>
+            <!-- <img src="images/bg4.png" alt="Veritas Logo"> -->
+            <div class="tbltbl">
+                <div class="container-fluid">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Fine's Data</h6>
+                            <div class="twobtn">
+                                <a class="btn btn-primary delrowall" data-toggle="modal" data-target="#deleteModal" href="#">
+                                    <i class='bx-fw bx bxs-trash bx-tada-hover'></i>
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                      <tr>
+                                        <th><input type="checkbox" id="selectAll"></th>
+                                        <th>ID</th>
+                                        <th>User ID</th>
+                                        <th>Checkout ID</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>Reason</th>
+                                        <th>Status</th>
+                                      </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th>ID</th>
+                                            <th>User ID</th>
+                                            <th>Checkout ID</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                            <th>Reason</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                      <% data.forEach(item => { %>
+                                        <tr>
+                                            <td><input type="checkbox" class="selectRow" name="fineidhidden" value="<%= item.Fine_ID %>"></td>
+                                            <td><%= item.Fine_ID %></td>
+                                            <td><%= item.User_ID %></td>
+                                            <td><%= item.Checkout_ID %></td>
+                                            <td><%= item.Fine_Amount %></td>
+                                            <td><%= item.Payment_Date %></td>
+                                            <td><%= item.Reason %></td>
+                                            <td><%= item.Fine_Status %></td>
+                                        </tr>
+                                      <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="/delFine" method="post">
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Select "Delete" below if you are ready to delete this user</div>
+                        <input type="hidden" name="fineidhidden">
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <input class="btn btn-primary" type="submit" href="/delFine"></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="/js/veritas.js"></script>
+    
+    <!-- Core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/js/demo/datatables-demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Student Dashboard</title>
+    <link rel="icon" href="/images/logo2.png"/>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'/>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="sidebar2 close2">
+        <div class="logo-details">
+            <a href="/dashboard">
+                <i class='bx bxl-vimeo'></i>
+                <span class="logo_name">Veritas LMS</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="/dashboard">
+                    <i class='bx bx-grid-alt' ></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li>
+                        <a class="link_name" href="/dashboard">Dashboard</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-book-alt' ></i>
+                        <span class="link_name">Records</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow' ></i>
+                </div>
+                <ul class="sub-menu">
+                    <li>
+                        <a class="link_name" href="#">Records</a>
+                    </li>
+                    <li>
+                        <a href="">Borrowed Books</a>
+                    </li>
+                    <li>
+                        <a href="">Returned Books</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-history'></i>
+                    <span class="link_name">History</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li>
+                        <a class="link_name" href="#">History</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog' ></i>
+                    <span class="link_name">Setting</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li>
+                        <a class="link_name" href="#">Setting</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div class="profile-details">
+                    <div class="profile-content">
+                        <img class="logo" src="images/logo2.png" alt="Veritas Logo">
+                    </div>
+                    <div class="name-job">
+                        <div class="profile_name"><%= user ? user.Name : 'Admin' %></div>
+                            <div class="job"><%= user ? user.User_Role : 'Admin' %></div>
+                    </div>
+                        <i class='bx bx-log-out' data-toggle="modal" data-target="#logoutModal"></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <div class="home-content">
+            <i class='bx bx-menu' ></i>
+            <span class="text">Staff Dashboard</span>
+        </div>
+        <img src="/images/bg5.png" alt="Veritas Logo">
+    </section>
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/veritas.js"></script>
+</body>
+</html>

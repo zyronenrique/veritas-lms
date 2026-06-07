@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="swiper.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        html,
+        body {
+            position: relative;
+            height: 100%;
+        }
+
+        body {
+            background: white;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 300px;
+            padding-top: 250px;
+            padding-bottom: 250px;
+        }
+
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            -webkit-box-reflect: below 2px linear-gradient(transparent, transparent,#0006);
+        }
+
+        .swiper-slide img {
+            border-radius: 2em;
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjw99KoenPPA9jqy6D0URg_Yk9vDJMFJIL_jmeBYeL9eCtPYqy_vWF9czQGWicOrZmtjc7pzHRQtTr06AwFnmcr8VHQm3M02Gifuy_8Skxd8uIS_9agX7e1wgzkSlI8co3JnM-79qtsASU/s320/cover.JPG" alt="Book Cover"></div>
+                <div class="swiper-slide"><img src="https://i.thenile.io/r1000/9780452262935.jpg?r=5e7d61110b596" alt="Book Cover"></div>
+                <div class="swiper-slide"><img src="https://th.bing.com/th/id/OIP.8aK7lEx70a-l2PAysUN8twHaKj?rs=1&pid=ImgDetMain" alt="Book Cover"></div>
+                <div class="swiper-slide"><img src="https://i.thenile.io/r1000/9781517283148.jpg?r=609502ad34ec5" alt="Book Cover"></div>
+                <div class="swiper-slide"><img src="https://th.bing.com/th/id/R.c1c6633e41f81590f94188bfda47f1c4?rik=Y8yYxcTO5JDqfg&riu=http%3a%2f%2fd28hgpri8am2if.cloudfront.net%2fbook_images%2fonix%2fcvr9781471134746%2fpride-and-prejudice-9781471134746_hr.jpg&ehk=x2q%2fXHpsXqzUEAXbe4Bq%2f7uW8D%2fDjubqcxy5Kr9N93g%3d&risl=&pid=ImgRaw&r=0" alt="Book Cover"></div>
+                <div class="swiper-slide"><img src="https://i.thenile.io/r1000/9780618645619.jpg?r=5eb588fe0f142" alt="Book Cover"></div>
+                <div class="swiper-slide"><img src="https://th.bing.com/th/id/OIP.92XE9L4c8CDC5q9BRPG-jQHaMP?rs=1&pid=ImgDetMain" alt="Book Cover"></div>
+                <div class="swiper-slide"><img src="https://th.bing.com/th/id/R.8697cc74db5911afdc6e83680530401b?rik=1vDwtG3ci2QYLg&riu=http%3a%2f%2fdwcp78yw3i6ob.cloudfront.net%2fwp-content%2fuploads%2f2016%2f12%2f12162813%2f100_Years_First_Ed_Hi_Res-768x1153.jpg&ehk=%2b6OxuEL8iXKiqX9LZgGO6Tac3AslNULuU8MjLqgFkYU%3d&risl=&pid=ImgRaw&r=0" alt="Book Cover"></div>
+                <div class="swiper-slide"><img src="https://www.bestofyabooks.nl/sites/default/files/covers/hires/9789000337071.jpg" alt="Book Cover"></div>
+                <div class="swiper-slide"><img src="https://th.bing.com/th/id/OIP.DGmeNcjwbdlMyGDVsb_rPwHaLH?rs=1&pid=ImgDetMain" alt="Book Cover"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "4",
+            coverflowEffect: {
+                rotate: 20,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            loop: true,
+            pagination: {
+              el: ".swiper-pagination",
+            },
+            autoplay: {
+                delay: 500,
+                disableOnInteraction: false,
+            },
+        });
+    </script>
+</body>
+</html>
